@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+</head>
+<body>
+
+        <form id="user_form" method="post" action="/login/"
+                enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" placeholder="login" name="username"/><br>
+            <input type="password" placeholder="password" name="password"/><br>
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Login" />
+        </form>
+</body>
+</html>

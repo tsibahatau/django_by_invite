@@ -1,0 +1,3 @@
+{% load i18n %}
+You have been invited by admin to join our cool django by invite site!
+{{url}}
