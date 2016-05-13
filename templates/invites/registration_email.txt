@@ -1,0 +1,4 @@
+{% load i18n %}
+Your credentials:
+Login: {{login}}
+Password: {{password}}

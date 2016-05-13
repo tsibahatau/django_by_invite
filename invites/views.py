@@ -1,11 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+
 from django.shortcuts import render
 
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
 from invites.models import Invite, UserProfile
+from invites.user_manager import user_create_from_invite
 
 
 def post_list(request):
@@ -16,13 +15,7 @@ def create_user(request):
         uiid = request.GET['invite']
         invite = Invite.objects.get(key=uiid)
         if invite and not invite.is_used:
-            user =  User.objects.create_user(username=invite.email,
-                                     email=invite.email,
-                                     password='supermegapassword')
-            profile = UserProfile.objects.create(user=user,invite_used=invite)
-            invite.is_used = True
-            invite.save()
-            print(profile.user.email)
+            user_create_from_invite(invite)
             return render(request,'invites/user_created_succesfully.html')
     return render(request,'invites/user_creating_wrong.html')
 
